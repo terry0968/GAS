@@ -3,143 +3,149 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#FFFCF6">
-  <meta name="description" content="天然氣消耗量單位換算工具，可換算立方公尺、公斤、度（kWh）、BTU 與公升。">
-  <title>天然氣消耗量換算｜暖暖計算所</title>
+  <meta name="theme-color" content="#f4f6f7">
+  <meta name="description" content="身為一位專業的瓦斯設計員，使用用氣量、壓力與大樓管線壓損工具，快速完成初步估算。">
+  <title>身為一位專業的瓦斯設計員｜瓦斯設計工作台</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Huninn&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="gas.css">
-  <script src="gas.js" defer></script>
 </head>
-<body>
-  <header class="topbar">
-    <a class="brand" href="index.html" aria-label="暖暖計算所首頁">
+<body class="home-page">
+  <header class="topbar home-topbar">
+    <a class="brand" href="index.html" aria-label="瓦斯設計工作台首頁">
       <svg viewBox="0 0 48 48" aria-hidden="true">
-        <path d="M24 4c2 9-7 11-7 19 0 4 3 6 7 6s7-3 7-7c5 4 8 9 8 14a15 15 0 0 1-30 0c0-7 4-13 10-17-1 6 1 9 5 9 5 0 6-5 0-24Z" fill="#F2A497" stroke="#3E3A39" stroke-width="2.5" stroke-linejoin="round"/>
-        <path d="M24 30c-4 4-6 7-6 10a6 6 0 0 0 12 0c0-3-2-7-6-10Z" fill="#F6D27A" stroke="#3E3A39" stroke-width="2"/>
+        <path d="M7 39V13l17-8 17 8v26H7Z" fill="#e1eee9" stroke="#183b3a" stroke-width="2.5" stroke-linejoin="round"/>
+        <path d="M17 39V25h14v14M14 17h5m10 0h5M24 13v5" fill="none" stroke="#183b3a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="24" cy="31" r="3" fill="#dd8a57"/>
       </svg>
-      <span>暖暖計算所</span>
+      <span>瓦斯設計工作台</span>
     </a>
-    <nav class="page-nav" aria-label="瓦斯換算工具">
-      <a class="page-nav__link page-nav__link--active" href="index.html" aria-current="page">消耗量換算</a>
+    <nav class="page-nav" aria-label="主選單">
+      <a class="page-nav__link page-nav__link--active" href="index.html" aria-current="page">首頁</a>
+      <a class="page-nav__link" href="consumption.html">用氣量換算</a>
       <a class="page-nav__link" href="pressure.html">壓力換算</a>
       <a class="page-nav__link" href="pipe-loss.html">大樓壓損</a>
     </nav>
   </header>
 
-  <main class="page">
-    <section class="intro" aria-labelledby="page-title">
-      <p class="eyebrow"><span aria-hidden="true">✦</span> 單位換算小工具</p>
-      <h1 id="page-title">天然氣用了多少？<br><span>一換就知道。</span></h1>
-      <p class="intro__copy">輸入消耗量，快速換算立方公尺、公斤、度數、BTU 與公升。適合估算參考，參數也能依帳單或供氣資訊調整。</p>
-      <div class="doodle" aria-hidden="true">
-        <svg viewBox="0 0 240 150">
-          <path d="M20 124h200" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/>
-          <path d="M60 122V76a60 60 0 0 1 120 0v46" fill="#A8D3E6" stroke="#3E3A39" stroke-width="3"/>
-          <path d="M76 120V79a44 44 0 0 1 88 0v41" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3"/>
-          <path d="M95 92c-6-12 8-17 3-29 15 8 18 19 11 27 9-2 13-9 13-16 13 14 8 33-9 37-13 3-25-7-18-19Z" fill="#F2A497" stroke="#3E3A39" stroke-width="2.5" stroke-linejoin="round"/>
-          <circle cx="45" cy="38" r="7" fill="#F6D27A" stroke="#3E3A39" stroke-width="2.5"/>
-          <path d="M193 34h17m-8-8v17" stroke="#3E3A39" stroke-width="2.5" stroke-linecap="round"/>
-          <path d="M33 76h12m-6-6v12" stroke="#3E3A39" stroke-width="2.5" stroke-linecap="round"/>
-        </svg>
+  <main class="home-main">
+    <section class="home-hero" aria-labelledby="home-title">
+      <div class="home-hero__copy">
+        <p class="home-eyebrow"><span aria-hidden="true"></span> GAS DESIGN WORKBENCH</p>
+        <h1 id="home-title">身為一位專業的<br><span>瓦斯設計員</span></h1>
+        <p class="home-hero__lead">從用氣需求、壓力單位到大樓管線，讓每一次估算都有清楚的依據。</p>
+        <a class="home-cta" href="pipe-loss.html">
+          開始大樓壓損估算
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <p class="home-hero__note">專業計算輔助工具・初步估算請由合格技術人員複核</p>
       </div>
+      <div class="home-hero__visual" aria-hidden="true">
+        <div class="schematic">
+          <svg viewBox="0 0 480 340">
+            <defs>
+              <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+                <path d="M24 0H0V24" fill="none" stroke="#dce5e2" stroke-width="1"/>
+              </pattern>
+            </defs>
+            <rect width="480" height="340" rx="22" fill="url(#grid)"/>
+            <path d="M55 170h94m0 0v-78h82m-82 78v78h82m0-156v156m0-156h102m-102 78h102m-102 78h102m0-156v156m0-156h82m-82 78h82m-82 78h82" fill="none" stroke="#315d58" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M55 170h94m0 0v-78h82m-82 78v78h82m0-156v156m0-156h102m-102 78h102m-102 78h102m0-156v156m0-156h82m-82 78h82m-82 78h82" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="3 12" stroke-linecap="round"/>
+            <rect x="22" y="146" width="64" height="48" rx="12" fill="#e4a36f" stroke="#183b3a" stroke-width="3"/>
+            <text x="54" y="176" text-anchor="middle" fill="#183b3a" font-size="15" font-weight="700">入口</text>
+            <g fill="#f7faf9" stroke="#183b3a" stroke-width="3">
+              <circle cx="149" cy="170" r="12"/><circle cx="231" cy="92" r="12"/><circle cx="231" cy="170" r="12"/><circle cx="231" cy="248" r="12"/>
+              <circle cx="333" cy="92" r="12"/><circle cx="333" cy="170" r="12"/><circle cx="333" cy="248" r="12"/>
+            </g>
+            <g fill="#fff" stroke="#183b3a" stroke-width="2">
+              <rect x="395" y="68" width="63" height="48" rx="10"/><rect x="395" y="146" width="63" height="48" rx="10"/><rect x="395" y="224" width="63" height="48" rx="10"/>
+            </g>
+            <g fill="#315d58">
+              <path d="M410 104V80h30v24m-22 0V91h14v13"/><path d="M410 182v-24h30v24m-22 0v-13h14v13"/><path d="M410 260v-24h30v24m-22 0v-13h14v13"/>
+            </g>
+            <g fill="#dd8a57"><circle cx="54" cy="55" r="5"/><circle cx="423" cy="47" r="5"/><circle cx="374" cy="298" r="5"/></g>
+            <text x="51" y="222" fill="#657873" font-size="13">SUPPLY</text>
+            <text x="393" y="294" fill="#657873" font-size="13">END POINTS</text>
+          </svg>
+          <div class="schematic__tag"><span></span> 分段流量・節點壓力・末端檢核</div>
+        </div>
+        <div class="hero-stamp"><strong>01</strong><span>設計<br>工作台</span></div>
+      </div>
+      <div class="hero-index" aria-hidden="true">01 / GAS ENGINEERING</div>
     </section>
 
-    <section class="calculator card" aria-labelledby="calculator-title">
-      <div class="section-title">
-        <span class="section-icon" aria-hidden="true">①</span>
+    <section class="tools-section" aria-labelledby="tools-title">
+      <div class="home-section-heading">
         <div>
-          <h2 id="calculator-title">輸入消耗量</h2>
-          <p>選擇目前知道的單位即可</p>
+          <p class="home-kicker">TOOLS &amp; CALCULATORS</p>
+          <h2 id="tools-title">設計常用工具</h2>
         </div>
+        <p>選擇工作項目，快速開始估算。</p>
       </div>
 
-      <form id="conversion-form" novalidate>
-        <div class="input-row">
-          <label class="field" for="amount">
-            <span class="field__label">消耗量</span>
-            <input id="amount" name="amount" type="number" min="0" step="any" inputmode="decimal" placeholder="例如：12.5" aria-describedby="form-error">
-          </label>
-          <label class="field field--unit" for="unit">
-            <span class="field__label">單位</span>
-            <select id="unit" name="unit">
-              <option value="m3">立方公尺（m³）</option>
-              <option value="kg">公斤（kg）</option>
-              <option value="kwh">度（kWh）</option>
-              <option value="btu">英熱單位（BTU）</option>
-              <option value="l">公升（L）</option>
-            </select>
-          </label>
-        </div>
-        <p id="form-error" class="form-error" role="alert" hidden></p>
-        <div class="actions">
-          <button class="button button--primary" type="submit">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            開始換算
-          </button>
-          <button class="button button--quiet" id="clear-button" type="reset">清除</button>
-        </div>
-      </form>
+      <div class="tool-grid">
+        <a class="tool-card tool-card--featured" href="pipe-loss.html">
+          <div class="tool-card__top">
+            <span class="tool-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 36 36"><path d="M4 18h10V8h9v10h9M14 18v10h9V18m0 0v10h9" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="14" cy="18" r="3" fill="#dd8a57"/><circle cx="23" cy="18" r="3" fill="#dd8a57"/></svg>
+            </span>
+            <span class="tool-card__arrow" aria-hidden="true">↗</span>
+          </div>
+          <span class="tool-card__eyebrow">PIPE NETWORK</span>
+          <h3>大樓管線壓損</h3>
+          <p>依管段、下游戶數與管徑，估算各節點壓降和最不利末端壓力。</p>
+          <span class="tool-card__link">開始計算 <span aria-hidden="true">→</span></span>
+        </a>
 
-      <details class="settings">
-        <summary>調整換算參數</summary>
-        <p class="settings__hint">預設為估算值；若有帳單或供氣商提供的資料，請以實際資訊替換。</p>
-        <div class="settings__grid">
-          <label class="field" for="energy-factor">
-            <span class="field__label">每立方公尺熱值（kWh/m³）</span>
-            <input id="energy-factor" type="number" min="0" step="any" value="10.55" inputmode="decimal">
-          </label>
-          <label class="field" for="density-factor">
-            <span class="field__label">每立方公尺重量（kg/m³）</span>
-            <input id="density-factor" type="number" min="0" step="any" value="0.72" inputmode="decimal">
-          </label>
-        </div>
-      </details>
+        <a class="tool-card" href="pressure.html">
+          <div class="tool-card__top">
+            <span class="tool-card__icon tool-card__icon--blue" aria-hidden="true">
+              <svg viewBox="0 0 36 36"><path d="M18 5v8m0 0a10 10 0 1 0 10 10H18m0-10h10A10 10 0 0 0 18 3" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18" cy="23" r="3" fill="#5f91a4"/></svg>
+            </span>
+            <span class="tool-card__arrow" aria-hidden="true">↗</span>
+          </div>
+          <span class="tool-card__eyebrow">PRESSURE UNITS</span>
+          <h3>瓦斯壓力換算</h3>
+          <p>快速轉換 kgf/cm²、MPa、bar、kPa、mbar、psi 與 mmAq。</p>
+          <span class="tool-card__link">前往換算 <span aria-hidden="true">→</span></span>
+        </a>
+
+        <a class="tool-card" href="consumption.html">
+          <div class="tool-card__top">
+            <span class="tool-card__icon tool-card__icon--sand" aria-hidden="true">
+              <svg viewBox="0 0 36 36"><path d="M7 29V17a11 11 0 0 1 22 0v12M12 29V17a6 6 0 0 1 12 0v12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M18 18c-3 3-4 5-2 7 2 2 6 0 5-3-.3-1-1-2-3-4Z" fill="#dd8a57"/></svg>
+            </span>
+            <span class="tool-card__arrow" aria-hidden="true">↗</span>
+          </div>
+          <span class="tool-card__eyebrow">GAS CONSUMPTION</span>
+          <h3>用氣量單位換算</h3>
+          <p>換算 m³、kg、kWh、BTU 與公升，熱值和密度參數可調整。</p>
+          <span class="tool-card__link">前往換算 <span aria-hidden="true">→</span></span>
+        </a>
+      </div>
     </section>
 
-    <section class="results" aria-labelledby="results-title" aria-live="polite">
-      <div class="section-title section-title--results">
-        <span class="section-icon section-icon--green" aria-hidden="true">②</span>
-        <div>
-          <h2 id="results-title">換算結果</h2>
-          <p id="result-caption">輸入數值後，結果會顯示在這裡</p>
-        </div>
+    <section class="method-strip" aria-label="工作流程">
+      <div class="method-strip__title">
+        <span class="home-kicker">A CLEARER WORKFLOW</span>
+        <strong>讓計算有脈絡，<br>讓設計更清楚。</strong>
       </div>
-      <div class="result-grid">
-        <article class="result-card result-card--yellow">
-          <span class="result-card__label">體積</span>
-          <p class="result-value"><output id="result-m3">—</output><span>m³</span></p>
-          <small>立方公尺</small>
-        </article>
-        <article class="result-card result-card--blue">
-          <span class="result-card__label">重量估算</span>
-          <p class="result-value"><output id="result-kg">—</output><span>kg</span></p>
-          <small>公斤</small>
-        </article>
-        <article class="result-card result-card--coral">
-          <span class="result-card__label">熱能估算</span>
-          <p class="result-value"><output id="result-kwh">—</output><span>kWh</span></p>
-          <small>度</small>
-        </article>
-        <article class="result-card result-card--green">
-          <span class="result-card__label">體積</span>
-          <p class="result-value"><output id="result-l">—</output><span>L</span></p>
-          <small>公升</small>
-        </article>
-        <article class="result-card result-card--purple">
-          <span class="result-card__label">熱能估算</span>
-          <p class="result-value"><output id="result-btu">—</output><span>BTU</span></p>
-          <small>英熱單位</small>
-        </article>
-      </div>
-      <p class="disclaimer">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11v5m0-8h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        換算結果為估算值。天然氣成分、熱值、溫度與壓力基準不同，都會影響實際換算；公升與立方公尺以 1 m³ = 1,000 L 換算。
-      </p>
+      <div class="method-step"><span>01</span><strong>輸入條件</strong><small>流量、壓力、管線資料</small></div>
+      <div class="method-step"><span>02</span><strong>逐段估算</strong><small>呈現公式和各段結果</small></div>
+      <div class="method-step"><span>03</span><strong>複核設計</strong><small>依適用規範確認實際設計</small></div>
     </section>
 
-    <footer class="footer">把複雜單位，換成看得懂的日常數字 <span aria-hidden="true">☁</span></footer>
+    <aside class="home-disclaimer">
+      <span class="home-disclaimer__icon" aria-hidden="true">i</span>
+      <p><strong>工程使用提醒</strong>　本工作台提供計算與初估輔助；實際管徑選用、材料規格、配件效應及施工安全，請依核准圖說與當地規範由合格專業人員確認。</p>
+    </aside>
+
+    <footer class="home-footer">
+      <a class="home-footer__brand" href="index.html">瓦斯設計工作台</a>
+      <span>身為一位專業的瓦斯設計員</span>
+      <span>GAS ENGINEERING TOOLS</span>
+    </footer>
   </main>
 </body>
 </html>

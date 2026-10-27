@@ -151,11 +151,34 @@ h1 span { color: #a14c43; }
 .conversion-table tbody th { position: sticky; left: 0; z-index: 1; text-align: left; }
 .conversion-table tbody tr:nth-child(even) { background: #e6fbf7; }
 
+.building-fields { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.settings__hint { margin: 14px 0 0; color: var(--muted); font-size: 14px; }
+.segments-card, .loss-output { margin-top: 24px; }
+.segment-table-wrap { overflow-x: auto; border: 2px solid var(--ink); border-radius: 14px; background: white; -webkit-overflow-scrolling: touch; }
+.segment-table { width: 100%; min-width: 930px; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.segment-table th, .segment-table td { border: 1px solid #b9b3a9; padding: 7px; text-align: center; vertical-align: middle; }
+.segment-table thead th { background: #eaf5f8; font-size: 13px; white-space: nowrap; }
+.segment-table td input { width: 100%; min-width: 68px; min-height: 40px; border: 1.5px solid #827b71; border-radius: 8px; background: var(--paper); padding: 5px 7px; text-align: center; font-variant-numeric: tabular-nums; }
+.segment-table td input:focus { outline: 3px dashed #527b65; outline-offset: 2px; }
+.segment-table td:nth-child(1) input, .segment-table td:nth-child(2) input { min-width: 84px; }
+.remove-segment { min-height: 36px; border: 1.5px solid var(--ink); border-radius: 8px; background: #fff0ec; padding: 4px 8px; cursor: pointer; white-space: nowrap; }
+.remove-segment:disabled { opacity: .45; cursor: not-allowed; }
+.loss-summary { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.loss-summary .result-value { font-size: clamp(20px, 3vw, 29px); }
+.pressure-status { margin: 17px 0 14px; border: 2px dashed var(--ink); border-radius: 12px; background: #fff3d4; padding: 10px 13px; font-weight: 700; }
+.pressure-status[data-state="ok"] { background: #eef6e8; }
+.pressure-status[data-state="error"] { background: #fff0ec; color: #8c2822; }
+.result-table-wrap { margin-top: 12px; }
+.result-table { min-width: 1020px; }
+.formula-note { margin-top: 20px; border-top: 2px dashed #c8c0b3; padding-top: 14px; }
+.formula-note summary { width: fit-content; cursor: pointer; font-weight: 700; }
+.formula-note p { margin: 10px 0 0; color: var(--muted); font-size: 14px; }
 @media (max-width: 640px) {
   .intro { min-height: 0; padding: 28px 4px 22px; }
   .intro__copy { max-width: 75%; }
   .doodle { right: 0; bottom: 12px; width: 30%; }
   .result-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .building-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 430px) {
@@ -168,6 +191,7 @@ h1 span { color: #a14c43; }
   .intro__copy { max-width: 100%; padding-right: 68px; font-size: 14px; }
   .doodle { right: -5px; bottom: 4px; width: 90px; opacity: .8; }
   .input-row, .settings__grid { grid-template-columns: 1fr; gap: 11px; }
+  .building-fields { grid-template-columns: 1fr; gap: 11px; }
   .field--unit { max-width: none; }
   .result-card { padding: 11px; }
 }

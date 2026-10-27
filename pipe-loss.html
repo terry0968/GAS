@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#FFFCF6">
+  <meta name="description" content="依集合住宅低壓流量計算書估算天然氣大樓管線分段壓損與末端壓力。">
+  <title>大樓管線壓損估算｜暖暖計算所</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Huninn&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="gas.css">
+  <script src="pipe-loss.js?v=1" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="暖暖計算所首頁">
+      <svg viewBox="0 0 48 48" aria-hidden="true">
+        <path d="M24 4c2 9-7 11-7 19 0 4 3 6 7 6s7-3 7-7c5 4 8 9 8 14a15 15 0 0 1-30 0c0-7 4-13 10-17-1 6 1 9 5 9 5 0 6-5 0-24Z" fill="#F2A497" stroke="#3E3A39" stroke-width="2.5" stroke-linejoin="round"/>
+        <path d="M24 30c-4 4-6 7-6 10a6 6 0 0 0 12 0c0-3-2-7-6-10Z" fill="#F6D27A" stroke="#3E3A39" stroke-width="2"/>
+      </svg>
+      <span>暖暖計算所</span>
+    </a>
+    <nav class="page-nav" aria-label="瓦斯換算工具">
+      <a class="page-nav__link" href="index.html">消耗量換算</a>
+      <a class="page-nav__link" href="pressure.html">壓力換算</a>
+      <a class="page-nav__link page-nav__link--active" href="pipe-loss.html" aria-current="page">大樓壓損</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <section class="intro pressure-intro" aria-labelledby="page-title">
+      <p class="eyebrow"><span aria-hidden="true">✦</span> 管線估算小工具</p>
+      <h1 id="page-title">大樓瓦斯壓損<br><span>從入口算到末端。</span></h1>
+      <p class="intro__copy">設定戶數、每戶用量與管線分段，即時估算各段設計流量、壓力損失及末端壓力。</p>
+    </section>
+
+    <form id="loss-form" novalidate>
+      <section class="pressure-card card" aria-labelledby="building-title">
+        <div class="section-title">
+          <span class="section-icon" aria-hidden="true">①</span>
+          <div>
+            <h2 id="building-title">大樓與入口條件</h2>
+            <p>預設值參考提供的低壓計算書，可依個案修改</p>
+          </div>
+        </div>
+        <div class="building-fields">
+          <label class="field" for="total-households">
+            <span class="field__label">全棟戶數</span>
+            <input id="total-households" type="number" min="1" max="1000" step="1" value="100" inputmode="numeric">
+          </label>
+          <label class="field" for="unit-flow">
+            <span class="field__label">每戶用氣量（m³/h）</span>
+            <input id="unit-flow" type="number" min="0.001" step="any" value="2.8" inputmode="decimal">
+          </label>
+          <label class="field" for="gas-gravity">
+            <span class="field__label">瓦斯比重</span>
+            <input id="gas-gravity" type="number" min="0.001" max="1" step="any" value="0.65" inputmode="decimal">
+          </label>
+          <label class="field" for="inlet-pressure">
+            <span class="field__label">入口壓力（mmAq）</span>
+            <input id="inlet-pressure" type="number" min="0" step="any" value="200" inputmode="decimal">
+          </label>
+          <label class="field" for="minimum-pressure">
+            <span class="field__label">末端最低壓力（mmAq）</span>
+            <input id="minimum-pressure" type="number" min="0" step="any" value="130" inputmode="decimal">
+          </label>
+          <label class="field" for="source-node">
+            <span class="field__label">入口節點名稱</span>
+            <input id="source-node" type="text" maxlength="24" value="A">
+          </label>
+        </div>
+        <p class="settings__hint">共同使用率依計算書的下游戶數查表：100 戶為 0.30。因此 100 戶 × 2.8 m³/h × 0.30 = 84 m³/h。</p>
+      </section>
+
+      <section class="pressure-card card segments-card" aria-labelledby="segments-title">
+        <div class="section-title">
+          <span class="section-icon section-icon--green" aria-hidden="true">②</span>
+          <div>
+            <h2 id="segments-title">管線分段</h2>
+            <p>以節點串接管段；允許分支，不支援閉合迴路</p>
+          </div>
+        </div>
+        <div class="segment-table-wrap">
+          <table class="segment-table">
+            <thead>
+              <tr>
+                <th scope="col">上游節點</th>
+                <th scope="col">下游節點</th>
+                <th scope="col">下游戶數</th>
+                <th scope="col">長度（m）</th>
+                <th scope="col">實際內徑（mm）</th>
+                <th scope="col">上升（m）</th>
+                <th scope="col">下降（m）</th>
+                <th scope="col" aria-label="操作"></th>
+              </tr>
+            </thead>
+            <tbody id="segment-rows">
+              <tr class="segment-row">
+                <td><input data-field="from" aria-label="管段 1 上游節點" value="A" maxlength="24"></td>
+                <td><input data-field="to" aria-label="管段 1 下游節點" value="B" maxlength="24"></td>
+                <td><input data-field="households" aria-label="管段 1 下游戶數" type="number" min="1" max="1000" step="1" value="100" inputmode="numeric"></td>
+                <td><input data-field="length" aria-label="管段 1 長度（公尺）" type="number" min="0" step="any" value="30" inputmode="decimal"></td>
+                <td><input data-field="diameter" aria-label="管段 1 實際內徑（毫米）" type="number" min="0.1" step="any" value="100" inputmode="decimal"></td>
+                <td><input data-field="rise" aria-label="管段 1 上升高度（公尺）" type="number" min="0" step="any" value="0" inputmode="decimal"></td>
+                <td><input data-field="fall" aria-label="管段 1 下降高度（公尺）" type="number" min="0" step="any" value="0" inputmode="decimal"></td>
+                <td><button class="remove-segment" type="button" aria-label="移除管段 1" disabled>移除</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="actions">
+          <button class="button button--primary" id="add-segment" type="button">＋ 新增管段</button>
+        </div>
+        <p id="loss-error" class="form-error" role="alert" hidden></p>
+      </section>
+    </form>
+
+    <section class="pressure-card card loss-output" aria-labelledby="summary-title" aria-live="polite">
+      <div class="section-title">
+        <span class="section-icon" aria-hidden="true">③</span>
+        <div>
+          <h2 id="summary-title">末端估算</h2>
+          <p id="summary-caption">修改條件或管段後即時更新</p>
+        </div>
+      </div>
+      <div class="result-grid loss-summary">
+        <article class="result-card result-card--yellow">
+          <span class="result-card__label">設計流量</span>
+          <p class="result-value"><output id="summary-flow">—</output><span>m³/h</span></p>
+          <small>入口管段</small>
+        </article>
+        <article class="result-card result-card--blue">
+          <span class="result-card__label">最不利末端</span>
+          <p class="result-value"><output id="summary-node">—</output></p>
+          <small>壓力最低的末端節點</small>
+        </article>
+        <article class="result-card result-card--coral">
+          <span class="result-card__label">末端壓力</span>
+          <p class="result-value"><output id="summary-pressure">—</output><span>mmAq</span></p>
+          <small>入口至該末端的估算壓力</small>
+        </article>
+        <article class="result-card result-card--green">
+          <span class="result-card__label">入口至末端壓差</span>
+          <p class="result-value"><output id="summary-drop">—</output><span>mmAq</span></p>
+          <small>含高程修正</small>
+        </article>
+      </div>
+      <p id="pressure-status" class="pressure-status" role="status">請確認管段資料與設計條件。</p>
+
+      <div class="segment-table-wrap result-table-wrap">
+        <table class="segment-table result-table">
+          <thead>
+            <tr>
+              <th scope="col">管段</th>
+              <th scope="col">下游戶數</th>
+              <th scope="col">共同使用率</th>
+              <th scope="col">設計流量（m³/h）</th>
+              <th scope="col">摩擦壓損（mmAq）</th>
+              <th scope="col">高程修正（mmAq）</th>
+              <th scope="col">累計壓差（mmAq）</th>
+              <th scope="col">下游壓力（mmAq）</th>
+            </tr>
+          </thead>
+          <tbody id="result-rows"></tbody>
+        </table>
+      </div>
+      <p class="disclaimer">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11v5m0-8h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        初估工具，依你提供的計算書公式與共同使用率表；附件未明示管徑 D 單位，本頁依 D＝實際內徑（mm）÷10 推定。請由合格瓦斯技術人員依核准圖說、材料實際內徑、配件與適用規範複核，不作施工或安全判定依據。
+      </p>
+    </section>
+
+    <details class="formula-note">
+      <summary>查看計算方式與共同使用率資料</summary>
+      <p>各段設計流量＝每戶流量 × 該段下游戶數 × 共同使用率。共同使用率採附件查表的近似查找方式（不超過該戶數的最大表列戶數）。</p>
+      <p>管段壓差依附件公式計算：摩擦壓損＝Q² × 瓦斯比重 × L ÷ [(0.888 × (1＋4.35/D)<sup>−1/2</sup>)² × D⁵]；高程修正＝1.293 × (1−瓦斯比重) × (下降高度−上升高度)。沿上游節點逐段累加，末端壓力＝入口壓力−累計壓差。</p>
+      <p>共同使用率資料來源：使用者提供的「集合住宅低壓流量計算書」工作表查表。此係數表不代表通用法規或其他瓦斯公司的設計係數。</p>
+    </details>
+
+    <footer class="footer">把複雜單位，換成看得懂的日常數字 <span aria-hidden="true">☁</span></footer>
+  </main>
+
+  <template id="segment-template">
+    <tr class="segment-row">
+      <td><input data-field="from" maxlength="24"></td>
+      <td><input data-field="to" maxlength="24"></td>
+      <td><input data-field="households" type="number" min="1" max="1000" step="1" inputmode="numeric"></td>
+      <td><input data-field="length" type="number" min="0" step="any" inputmode="decimal"></td>
+      <td><input data-field="diameter" type="number" min="0.1" step="any" inputmode="decimal"></td>
+      <td><input data-field="rise" type="number" min="0" step="any" value="0" inputmode="decimal"></td>
+      <td><input data-field="fall" type="number" min="0" step="any" value="0" inputmode="decimal"></td>
+      <td><button class="remove-segment" type="button">移除</button></td>
+    </tr>
+  </template>
+</body>
+</html>

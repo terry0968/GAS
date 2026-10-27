@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#FFFCF6">
+  <meta name="description" content="瓦斯壓力單位換算工具，支援 kgf/cm²、MPa、bar、kPa、mbar、psi、mmAq、Torr 與 atm。">
+  <title>瓦斯壓力換算｜暖暖計算所</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Huninn&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="gas.css">
+  <script src="pressure.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="暖暖計算所首頁">
+      <svg viewBox="0 0 48 48" aria-hidden="true">
+        <path d="M24 4c2 9-7 11-7 19 0 4 3 6 7 6s7-3 7-7c5 4 8 9 8 14a15 15 0 0 1-30 0c0-7 4-13 10-17-1 6 1 9 5 9 5 0 6-5 0-24Z" fill="#F2A497" stroke="#3E3A39" stroke-width="2.5" stroke-linejoin="round"/>
+        <path d="M24 30c-4 4-6 7-6 10a6 6 0 0 0 12 0c0-3-2-7-6-10Z" fill="#F6D27A" stroke="#3E3A39" stroke-width="2"/>
+      </svg>
+      <span>暖暖計算所</span>
+    </a>
+    <nav class="page-nav" aria-label="瓦斯換算工具">
+      <a class="page-nav__link" href="index.html">消耗量換算</a>
+      <a class="page-nav__link page-nav__link--active" href="pressure.html" aria-current="page">壓力換算</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <section class="intro pressure-intro" aria-labelledby="page-title">
+      <p class="eyebrow"><span aria-hidden="true">✦</span> 單位換算小工具</p>
+      <h1 id="page-title">瓦斯壓力換算<br><span>各種單位，一表看懂。</span></h1>
+      <p class="intro__copy">輸入壓力與單位，即時查看換算結果；下方附上完整單位對照表，方便查找與比較。</p>
+    </section>
+
+    <section class="pressure-card card" aria-labelledby="calculator-title">
+      <div class="section-title">
+        <span class="section-icon" aria-hidden="true">①</span>
+        <div>
+          <h2 id="calculator-title">輸入壓力</h2>
+          <p>可輸入正值或負值，換算結果會即時更新</p>
+        </div>
+      </div>
+      <form id="pressure-form" novalidate>
+        <div class="input-row">
+          <label class="field" for="pressure-amount">
+            <span class="field__label">壓力值</span>
+            <input id="pressure-amount" name="amount" type="number" step="any" inputmode="decimal" placeholder="例如：1" aria-describedby="pressure-error">
+          </label>
+          <label class="field field--unit" for="pressure-unit">
+            <span class="field__label">原始單位</span>
+            <select id="pressure-unit" name="unit"></select>
+          </label>
+        </div>
+        <p id="pressure-error" class="form-error" role="alert" hidden></p>
+      </form>
+
+      <section class="pressure-results" aria-labelledby="results-title" aria-live="polite">
+        <div class="section-title section-title--results">
+          <span class="section-icon section-icon--green" aria-hidden="true">②</span>
+          <div>
+            <h2 id="results-title">換算結果</h2>
+            <p id="pressure-caption">輸入數值後，結果會顯示在這裡</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="conversion-table" aria-label="輸入壓力換算結果">
+            <thead><tr id="result-head"><th scope="col">原始單位</th></tr></thead>
+            <tbody><tr id="result-row"><th id="result-source" scope="row">—</th></tr></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <section class="pressure-card pressure-results card" aria-labelledby="matrix-title">
+      <div class="section-title">
+        <span class="section-icon section-icon--green" aria-hidden="true">③</span>
+        <div>
+          <h2 id="matrix-title">壓力單位對照表</h2>
+          <p>表格每一列代表 1 個列標單位，換算為各欄單位的數值</p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="conversion-table" aria-label="瓦斯壓力單位換算對照表">
+          <thead><tr id="matrix-head"><th scope="col">換算結果</th></tr></thead>
+          <tbody id="matrix-body"></tbody>
+        </table>
+      </div>
+      <p class="matrix-note">mmAq 與 mmH₂O 為同一單位；Torr 與 mmHg 採常用近似標示。表格以標準單位換算係數計算，顯示值經四捨五入。</p>
+    </section>
+
+    <footer class="footer">把複雜單位，換成看得懂的日常數字 <span aria-hidden="true">☁</span></footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#FFFCF6">
+  <meta name="description" content="使用設計流量與製造商型錄資料，進行瓦斯調壓器容量及壓力條件初步比對。">
+  <title>調壓器容量初選｜身為一位專業的瓦斯設計員</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Huninn&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="gas.css">
+  <script src="regulator.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="瓦斯設計工作台首頁">
+      <svg viewBox="0 0 48 48" aria-hidden="true">
+        <path d="M7 39V13l17-8 17 8v26H7Z" fill="#e1eee9" stroke="#183b3a" stroke-width="2.5" stroke-linejoin="round"/>
+        <path d="M17 39V25h14v14M14 17h5m10 0h5M24 13v5" fill="none" stroke="#183b3a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="24" cy="31" r="3" fill="#dd8a57"/>
+      </svg>
+      <span>瓦斯設計工作台</span>
+    </a>
+    <nav class="page-nav" aria-label="主選單">
+      <a class="page-nav__link" href="index.html">首頁</a>
+      <a class="page-nav__link" href="consumption.html">用氣量換算</a>
+      <a class="page-nav__link" href="pressure.html">壓力換算</a>
+      <a class="page-nav__link" href="pipe-loss.html">大樓壓損</a>
+      <a class="page-nav__link page-nav__link--active" href="regulator.html" aria-current="page">調壓器初選</a>
+      <a class="page-nav__link" href="checklist.html">現場勘查</a>
+    </nav>
+  </header>
+  <main class="page">
+    <section class="intro pressure-intro" aria-labelledby="page-title">
+      <p class="eyebrow"><span aria-hidden="true">✦</span> 設備初選小工具</p>
+      <h1 id="page-title">調壓器容量初選<br><span>依條件比對型錄。</span></h1>
+      <p class="intro__copy">輸入設計需求與製造商型錄資料，找出容量與壓力範圍符合條件的候選型號。</p>
+    </section>
+    <form id="regulator-form" novalidate>
+      <section class="pressure-card card" aria-labelledby="design-title">
+        <div class="section-title">
+          <span class="section-icon" aria-hidden="true">①</span>
+          <div><h2 id="design-title">設計條件</h2><p>壓力單位統一使用 kPa；流量使用 m³/h</p></div>
+        </div>
+        <div class="building-fields">
+          <label class="field" for="design-flow"><span class="field__label">設計流量（m³/h）</span><input id="design-flow" type="number" min="0.001" step="any" required inputmode="decimal" placeholder="例如：84"></label>
+          <label class="field" for="design-inlet"><span class="field__label">設計入口壓力（kPa）</span><input id="design-inlet" type="number" min="0" step="any" required inputmode="decimal" placeholder="依現場條件填寫"></label>
+          <label class="field" for="design-outlet"><span class="field__label">需求出口壓力（kPa）</span><input id="design-outlet" type="number" min="0" step="any" required inputmode="decimal" placeholder="依設備需求填寫"></label>
+        </div>
+      </section>
+      <section class="candidate-card card" aria-labelledby="candidate-title">
+        <div class="section-title">
+          <span class="section-icon section-icon--green" aria-hidden="true">②</span>
+          <div><h2 id="candidate-title">型錄候選資料</h2><p>請按製造商資料輸入額定容量與允許壓力範圍</p></div>
+        </div>
+        <div class="candidate-table-wrap">
+          <table class="candidate-table">
+            <thead><tr><th scope="col">型號／來源</th><th scope="col">額定容量（m³/h）</th><th scope="col">入口最低（kPa）</th><th scope="col">入口最高（kPa）</th><th scope="col">出口最低（kPa）</th><th scope="col">出口最高（kPa）</th><th scope="col">操作</th></tr></thead>
+            <tbody id="candidate-rows"></tbody>
+          </table>
+        </div>
+        <div class="actions">
+          <button class="button button--primary" id="add-candidate" type="button">＋ 新增候選型號</button>
+          <button class="button button--quiet" type="submit">比對條件</button>
+        </div>
+        <p id="regulator-error" class="form-error" role="alert" hidden></p>
+      </section>
+    </form>
+    <section class="pressure-card card regulator-results-card" aria-labelledby="result-title">
+      <div class="section-title">
+        <span class="section-icon" aria-hidden="true">③</span>
+        <div><h2 id="result-title">初選比對結果</h2><p>僅依已填入的設計條件與型錄資料判斷</p></div>
+      </div>
+      <p id="regulator-summary" class="candidate-result" role="status">輸入條件並新增型錄資料後，按「比對條件」查看結果。</p>
+      <div id="regulator-results" class="candidate-result-list"></div>
+      <p class="regulator-note">初選不是設備核定或安全判定。額定容量必須適用於實際瓦斯種類及型錄所列測試條件；請核對製造商資料、供氣條件、法規與合格專業人員意見。</p>
+    </section>
+    <footer class="footer">初步比對結果請依製造商型錄與適用規範複核。</footer>
+  </main>
+  <template id="candidate-template">
+    <tr>
+      <td><input data-field="model" type="text" required aria-label="調壓器型號或型錄來源" placeholder="型號／型錄來源"></td>
+      <td><input data-field="capacity" type="number" min="0.001" step="any" required aria-label="額定容量（立方公尺每小時）"></td>
+      <td><input data-field="inletMin" type="number" min="0" step="any" required aria-label="入口最低壓力（千帕）"></td>
+      <td><input data-field="inletMax" type="number" min="0" step="any" required aria-label="入口最高壓力（千帕）"></td>
+      <td><input data-field="outletMin" type="number" min="0" step="any" required aria-label="出口最低壓力（千帕）"></td>
+      <td><input data-field="outletMax" type="number" min="0" step="any" required aria-label="出口最高壓力（千帕）"></td>
+      <td><button class="candidate-remove" type="button">移除</button></td>
+    </tr>
+  </template>
+</body>
+</html>

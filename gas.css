@@ -196,6 +196,12 @@ h1 span { color: #a14c43; }
   .result-card { padding: 11px; }
 }
 
+@media (max-width: 760px) {
+  .topbar { flex-direction: column; align-items: stretch; }
+  .brand { align-self: center; }
+  .page-nav { justify-content: center; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
 }
@@ -317,4 +323,41 @@ h1 span { color: #a14c43; }
   .method-step, .method-step:first-of-type { border-top: 1px solid #d0dcd7; border-left: 0; padding: 11px 0 0; }
   .home-disclaimer { padding: 11px; }
   .home-footer { align-items: flex-start; flex-direction: column; gap: 4px; }
+}
+
+.candidate-card, .checklist-section { margin-top: 20px; padding: clamp(18px, 4vw, 26px); }
+.regulator-results-card { margin-top: 24px; }
+.candidate-table-wrap { overflow-x: auto; border: 2px solid var(--ink); border-radius: 14px; background: white; -webkit-overflow-scrolling: touch; }
+.candidate-table { width: 100%; min-width: 970px; border-collapse: collapse; }
+.candidate-table th, .candidate-table td { border: 1px solid #b9b3a9; padding: 7px; text-align: left; vertical-align: middle; }
+.candidate-table thead th { background: #eaf5f8; font-size: 13px; white-space: nowrap; }
+.candidate-table input { width: 100%; min-width: 88px; min-height: 40px; border: 1.5px solid #827b71; border-radius: 8px; background: var(--paper); padding: 5px 7px; }
+.candidate-table td:first-child input { min-width: 130px; }
+.candidate-remove { min-height: 36px; border: 1.5px solid var(--ink); border-radius: 8px; background: #fff0ec; padding: 4px 8px; cursor: pointer; white-space: nowrap; }
+.candidate-result { margin: 15px 0 0; border: 2px dashed var(--ink); border-radius: 12px; background: #fff3d4; padding: 12px 14px; }
+.candidate-result[data-state="ok"] { background: #eef6e8; }
+.candidate-result[data-state="error"] { background: #fff0ec; color: #8c2822; }
+.candidate-result-list { display: grid; gap: 9px; margin-top: 14px; }
+.candidate-result-item { display: grid; grid-template-columns: minmax(120px, .7fr) minmax(0, 2fr); gap: 12px; border: 1px solid #dce5e2; border-radius: 12px; background: white; padding: 12px 14px; }
+.candidate-result-item strong { overflow-wrap: anywhere; }
+.candidate-result-item span { color: var(--muted); }
+.checklist-meta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.checklist-section h2 { margin: 0 0 14px; font-size: 21px; }
+.checklist-items { display: grid; gap: 10px; }
+.checklist-item { display: flex; align-items: flex-start; gap: 10px; border: 1px solid #dce5e2; border-radius: 11px; background: white; padding: 10px 12px; }
+.checklist-item input { width: 20px; height: 20px; flex: 0 0 20px; margin: 3px 0 0; accent-color: #315d58; }
+.checklist-item span { min-width: 0; }
+.checklist-section textarea { width: 100%; min-height: 96px; border: 1.5px solid #827b71; border-radius: 10px; background: white; padding: 10px; resize: vertical; }
+.checklist-status { min-height: 1.5em; margin: 10px 0 0; color: #315d58; font-size: 14px; }
+.checklist-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.checklist-actions .button--danger { background: #fff0ec; }
+.regulator-note { margin: 13px 0 0; color: var(--muted); font-size: 13px; }
+@media (max-width: 640px) {
+  .checklist-meta, .candidate-result-item { grid-template-columns: 1fr; }
+}
+@media print {
+  .topbar, .checklist-actions, .footer, .checklist-status { display: none !important; }
+  body { background: white; }
+  .page { width: 100%; }
+  .card, .checklist-section { break-inside: avoid; box-shadow: none; }
 }

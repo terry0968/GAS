@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#FFFCF6">
+  <meta name="description" content="瓦斯設計現場勘查清單，記錄案件、供氣設備、管線路徑與現場觀察。">
+  <title>現場勘查檢查清單｜身為一位專業的瓦斯設計員</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Huninn&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="gas.css">
+  <script src="checklist.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="瓦斯設計工作台首頁">
+      <svg viewBox="0 0 48 48" aria-hidden="true">
+        <path d="M7 39V13l17-8 17 8v26H7Z" fill="#e1eee9" stroke="#183b3a" stroke-width="2.5" stroke-linejoin="round"/>
+        <path d="M17 39V25h14v14M14 17h5m10 0h5M24 13v5" fill="none" stroke="#183b3a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="24" cy="31" r="3" fill="#dd8a57"/>
+      </svg>
+      <span>瓦斯設計工作台</span>
+    </a>
+    <nav class="page-nav" aria-label="主選單">
+      <a class="page-nav__link" href="index.html">首頁</a>
+      <a class="page-nav__link" href="consumption.html">用氣量換算</a>
+      <a class="page-nav__link" href="pressure.html">壓力換算</a>
+      <a class="page-nav__link" href="pipe-loss.html">大樓壓損</a>
+      <a class="page-nav__link" href="regulator.html">調壓器初選</a>
+      <a class="page-nav__link page-nav__link--active" href="checklist.html" aria-current="page">現場勘查</a>
+    </nav>
+  </header>
+  <main class="page">
+    <section class="intro pressure-intro" aria-labelledby="page-title">
+      <p class="eyebrow"><span aria-hidden="true">✦</span> 現場紀錄工具</p>
+      <h1 id="page-title">現場勘查檢查清單<br><span>重要資訊，逐項記錄。</span></h1>
+      <p class="intro__copy">記錄案件基本資料、供氣設備、管線路徑與現場觀察；勾選和備註會自動保存在這部裝置的瀏覽器。</p>
+    </section>
+    <form id="checklist-form">
+      <section class="checklist-section card" aria-labelledby="project-title">
+        <h2 id="project-title">案件基本資料</h2>
+        <div class="checklist-meta">
+          <label class="field" for="project-name"><span class="field__label">案件／客戶名稱</span><input id="project-name" type="text" autocomplete="organization"></label>
+          <label class="field" for="site-address"><span class="field__label">勘查地址</span><input id="site-address" type="text" autocomplete="street-address"></label>
+          <label class="field" for="inspection-date"><span class="field__label">勘查日期</span><input id="inspection-date" type="date"></label>
+          <label class="field" for="inspector"><span class="field__label">勘查人員</span><input id="inspector" type="text" autocomplete="name"></label>
+        </div>
+      </section>
+      <section class="checklist-section card" aria-labelledby="supply-title">
+        <h2 id="supply-title">供氣與設備</h2>
+        <div class="checklist-items">
+          <label class="checklist-item"><input type="checkbox" data-check-item="supply-source"><span>記錄瓦斯種類及供氣來源</span></label>
+          <label class="checklist-item"><input type="checkbox" data-check-item="inlet-pressure"><span>確認並記錄可取得的入口壓力與量測條件</span></label>
+          <label class="checklist-item"><input type="checkbox" data-check-item="meter"><span>記錄瓦斯表位置、型式與可辨識的規格資料</span></label>
+          <label class="checklist-item"><input type="checkbox" data-check-item="regulator"><span>記錄調壓器位置、型號及可查閱的型錄資料</span></label>
+          <label class="checklist-item"><input type="checkbox" data-check-item="appliances"><span>盤點用氣設備、數量與標示用氣量／熱負荷</span></label>
+        </div>
+      </section>
+      <section class="checklist-section card" aria-labelledby="route-title">
+        <h2 id="route-title">管線與現場條件</h2>
+        <div class="checklist-items">
+          <label class="checklist-item"><input type="checkbox" data-check-item="route"><span>記錄可見管線路徑、長度與主要轉折</span></label>
+          <label class="checklist-item"><input type="checkbox" data-check-item="pipe-size"><span>記錄可辨識的管材、管徑及實際可查證資料</span></label>
+          <label class="checklist-item"><input type="checkbox" data-check-item="elevation"><span>記錄樓層、高低差與設備相對位置</span></label>
+          <label class="checklist-item"><input type="checkbox" data-check-item="fittings"><span>記錄可見閥件、分支、接頭及其他相關配件</span></label>
+          <label class="checklist-item"><input type="checkbox" data-check-item="ventilation"><span>記錄設備周邊通風與安裝環境，並依適用要求複核</span></label>
+          <label class="checklist-item"><input type="checkbox" data-check-item="access"><span>確認設備維護空間、檢修動線與可接近性</span></label>
+        </div>
+      </section>
+      <section class="checklist-section card" aria-labelledby="notes-title">
+        <h2 id="notes-title">備註與待確認事項</h2>
+        <label class="field" for="site-notes"><span class="field__label">現場觀察、待補資料或需後續複核事項</span><textarea id="site-notes" rows="5" placeholder="請記錄尚未確認的資料、照片編號或後續追蹤事項"></textarea></label>
+        <p id="checklist-status" class="checklist-status" role="status" aria-live="polite"></p>
+        <div class="checklist-actions">
+          <button class="button button--primary" id="print-checklist" type="button">列印／另存 PDF</button>
+          <button class="button button--danger" id="clear-checklist" type="button">清除本機紀錄</button>
+        </div>
+      </section>
+    </form>
+    <footer class="footer">清單用於現場資訊記錄，不取代設計審查、法規檢核或安全檢查。</footer>
+  </main>
+</body>
+</html>

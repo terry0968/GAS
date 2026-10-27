@@ -150,8 +150,6 @@ h1 span { color: #a14c43; }
 .conversion-table thead th:first-child, .conversion-table tbody th { background: #b7f5eb; }
 .conversion-table tbody th { position: sticky; left: 0; z-index: 1; text-align: left; }
 .conversion-table tbody tr:nth-child(even) { background: #e6fbf7; }
-.conversion-table .matrix-self { background: #d3f0b5; font-weight: 700; }
-.matrix-note { margin: 11px 0 0; color: var(--muted); font-size: 13px; }
 
 @media (max-width: 640px) {
   .intro { min-height: 0; padding: 28px 4px 22px; }

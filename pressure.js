@@ -8,9 +8,7 @@
     { id: "kpa", label: "kPa", pascals: 1000 },
     { id: "mbar", label: "mbar", pascals: 100 },
     { id: "psi", label: "psi", pascals: 6894.757293168 },
-    { id: "mmaq", label: "mmAq / mmH₂O", pascals: 9.80665 },
-    { id: "torr", label: "Torr / mmHg", pascals: 133.322368421 },
-    { id: "atm", label: "atm", pascals: 101325 }
+    { id: "mmaq", label: "mmAq / mmH₂O", pascals: 9.80665 }
   ];
 
   var form = document.getElementById("pressure-form");
@@ -21,9 +19,6 @@
   var resultRow = document.getElementById("result-row");
   var resultSource = document.getElementById("result-source");
   var caption = document.getElementById("pressure-caption");
-  var matrixHead = document.getElementById("matrix-head");
-  var matrixBody = document.getElementById("matrix-body");
-
   function formatNumber(value) {
     if (Math.abs(value) > 0 && Math.abs(value) < 0.000001) {
       return value.toExponential(4);
@@ -31,15 +26,6 @@
     return new Intl.NumberFormat("zh-TW", {
       maximumSignificantDigits: 7
     }).format(value);
-  }
-
-  function addUnitHeaders(row) {
-    UNITS.forEach(function (unit) {
-      var cell = document.createElement("th");
-      cell.scope = "col";
-      cell.textContent = unit.label;
-      row.appendChild(cell);
-    });
   }
 
   function buildUnitOptions() {
@@ -52,28 +38,11 @@
       var resultCell = document.createElement("td");
       resultRow.appendChild(resultCell);
     });
-    addUnitHeaders(resultHead);
-    addUnitHeaders(matrixHead);
-  }
-
-  function buildMatrix() {
-    UNITS.forEach(function (source) {
-      var row = document.createElement("tr");
-      var heading = document.createElement("th");
-      heading.scope = "row";
-      heading.textContent = source.label;
-      row.appendChild(heading);
-
-      UNITS.forEach(function (target) {
-        var cell = document.createElement("td");
-        cell.textContent = formatNumber(source.pascals / target.pascals);
-        if (source.id === target.id) {
-          cell.className = "matrix-self";
-        }
-        row.appendChild(cell);
-      });
-
-      matrixBody.appendChild(row);
+    UNITS.forEach(function (unit) {
+      var cell = document.createElement("th");
+      cell.scope = "col";
+      cell.textContent = unit.label;
+      resultHead.appendChild(cell);
     });
   }
 
@@ -106,12 +75,11 @@
     Array.prototype.slice.call(resultRow.querySelectorAll("td")).forEach(function (cell, index) {
       cell.textContent = formatNumber(pascals / UNITS[index].pascals);
     });
-    caption.textContent = "輸入值已換算為全部 9 種壓力單位";
+    caption.textContent = "輸入值已換算為全部 7 種壓力單位";
   }
 
   form.addEventListener("input", convert);
   form.addEventListener("change", convert);
 
   buildUnitOptions();
-  buildMatrix();
 }());
